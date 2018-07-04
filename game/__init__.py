@@ -23,6 +23,14 @@ screen.blit(rex ,position_rex)
 pygame.display.flip()
 pygame.key.set_repeat(400, 30)
 continuer = 1
+score = 0;
+
+
+def print_score(score):
+    score += 1
+    font = pygame.font.Font(None, 30)
+    scoretext = font.render("Score:" + str(score), 1, (0, 0, 0))
+    screen.blit(scoretext, (100,100))
 
 def jump(position_rex):
     rex = pygame.image.load("images/rex/t-rex1.png").convert_alpha()
@@ -36,6 +44,7 @@ def jump(position_rex):
         screen.fill(white)
         screen.blit(ground, position_ground)
         screen.blit(rex, position_rex)
+        print_score(score)
         pygame.display.flip()
 
 def running(position_rex):
@@ -44,11 +53,13 @@ def running(position_rex):
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
+    print_score(score)
     pygame.display.flip()
     rex = pygame.image.load("images/rex/t-rex4.png").convert_alpha()
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
+    print_score(score)
     pygame.display.flip()
 
 def charge(position_rex):
@@ -56,11 +67,13 @@ def charge(position_rex):
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
+    print_score(score)
     pygame.display.flip()
     rex = pygame.image.load("images/rex/t-rex8.png").convert_alpha()
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
+    print_score(score)
     pygame.display.flip()
 
 def start():
@@ -76,6 +89,7 @@ def start():
 
 start()
 jump(position_rex)
+
 while continuer:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -89,6 +103,7 @@ while continuer:
                 position_rex = position_rex.move(0, 17)
                 while down:
                     charge(position_rex)
+                    score += 1
                     for event in pygame.event.get():
                         if event.type == QUIT:
                             pygame.quit()
@@ -97,3 +112,5 @@ while continuer:
                             down = 0
                 position_rex = position_rex.move(0, -17)
     running(position_rex)
+    score += 1
+
