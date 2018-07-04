@@ -11,9 +11,13 @@ white = [247, 247, 247]
 screen.fill(white)
 surface = pygame.display.get_surface()
 rex = pygame.image.load("images/rex/t-rex-start.png").convert_alpha()
-# ptera = pygame.image.load("images/ptera/ptera1.png").convert_alpha()
+ground = pygame.image.load("images/landscape/ground.png").convert_alpha()
+ptera = pygame.image.load("images/ptera/ptera1.png").convert_alpha()
 position_rex = rex.get_rect()
-position_rex = position_rex.move(100,surface.get_height() - 45)
+position_rex = position_rex.move(100,surface.get_height() - 43)
+position_ground = ground.get_rect()
+position_ground = position_ground.move(0,surface.get_height() - 15)
+screen.blit(ground, position_ground)
 screen.blit(rex ,position_rex)
 
 pygame.display.flip()
@@ -30,16 +34,32 @@ def jump(position_rex):
             position_rex = position_rex.move(0, 1)
             sleep(0.003)
         screen.fill(white)
+        screen.blit(ground, position_ground)
         screen.blit(rex, position_rex)
         pygame.display.flip()
 
 def running(position_rex):
     rex = pygame.image.load("images/rex/t-rex3.png").convert_alpha()
+    # rex.set_colorkey((255, 255, 255))
     screen.fill(white)
+    screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
     pygame.display.flip()
     rex = pygame.image.load("images/rex/t-rex4.png").convert_alpha()
     screen.fill(white)
+    screen.blit(ground, position_ground)
+    screen.blit(rex, position_rex)
+    pygame.display.flip()
+
+def charge(position_rex):
+    rex = pygame.image.load("images/rex/t-rex7.png").convert_alpha()
+    screen.fill(white)
+    screen.blit(ground, position_ground)
+    screen.blit(rex, position_rex)
+    pygame.display.flip()
+    rex = pygame.image.load("images/rex/t-rex8.png").convert_alpha()
+    screen.fill(white)
+    screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
     pygame.display.flip()
 
@@ -64,4 +84,16 @@ while continuer:
             if event.key == K_UP or event.key == K_SPACE:
                 jump(position_rex)
                 rex = pygame.image.load("images/rex/t-rex1.png").convert_alpha()
+            if event.key == K_DOWN:
+                down = 1
+                position_rex = position_rex.move(0, 17)
+                while down:
+                    charge(position_rex)
+                    for event in pygame.event.get():
+                        if event.type == QUIT:
+                            pygame.quit()
+                            sys.exit()
+                        if event.type == KEYUP and event.key == K_DOWN:
+                            down = 0
+                position_rex = position_rex.move(0, -17)
     running(position_rex)
