@@ -3,7 +3,7 @@ import time
 import sys
 from pygame.locals import *
 from time import sleep
-
+from game.Afficheur import Afficheur
 pygame.init()
 
 screen = pygame.display.set_mode((640, 480))
@@ -26,25 +26,24 @@ continuer = 1
 score = 0;
 
 
-def print_score(score):
-    score += 1
-    font = pygame.font.Font(None, 30)
-    scoretext = font.render("Score:" + str(score), 1, (0, 0, 0))
-    screen.blit(scoretext, (100,100))
+# def print_score(score):
+#     score += 1
+#     font = pygame.font.Font(None, 30)
+#     scoretext = font.render("Score:" + str(score), 1, (0, 0, 0))
+#     screen.blit(scoretext, (100,100))
 
 def jump(position_rex):
     rex = pygame.image.load("images/rex/t-rex1.png").convert_alpha()
     for i in range(0, 150):
         if i < 75:
             position_rex = position_rex.move(0, -1)
-            sleep(0.003)
+            sleep(0.002)
         else:
             position_rex = position_rex.move(0, 1)
-            sleep(0.003)
+            sleep(0.002)
         screen.fill(white)
         screen.blit(ground, position_ground)
         screen.blit(rex, position_rex)
-        print_score(score)
         pygame.display.flip()
 
 def running(position_rex):
@@ -53,13 +52,11 @@ def running(position_rex):
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
-    print_score(score)
     pygame.display.flip()
     rex = pygame.image.load("images/rex/t-rex4.png").convert_alpha()
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
-    print_score(score)
     pygame.display.flip()
 
 def charge(position_rex):
@@ -67,13 +64,11 @@ def charge(position_rex):
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
-    print_score(score)
     pygame.display.flip()
     rex = pygame.image.load("images/rex/t-rex8.png").convert_alpha()
     screen.fill(white)
     screen.blit(ground, position_ground)
     screen.blit(rex, position_rex)
-    print_score(score)
     pygame.display.flip()
 
 def start():
@@ -89,11 +84,13 @@ def start():
 
 start()
 jump(position_rex)
-
+afficheur = Afficheur(score, screen, 1)
+afficheur.start()
 while continuer:
     for event in pygame.event.get():
         if event.type == QUIT:
             continuer = 0
+            afficheur._set_play(0)
         if event.type == KEYDOWN:
             if event.key == K_UP or event.key == K_SPACE:
                 jump(position_rex)
@@ -106,6 +103,7 @@ while continuer:
                     score += 1
                     for event in pygame.event.get():
                         if event.type == QUIT:
+                            afficheur._set_play(0)
                             pygame.quit()
                             sys.exit()
                         if event.type == KEYUP and event.key == K_DOWN:
