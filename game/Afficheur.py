@@ -1,25 +1,34 @@
 import pygame
 from threading import Thread
 
+
 class Afficheur(Thread):
+    pygame.init()
+
 
     score = 0;
     screen = None
-    play = 0
+    clock = pygame.time.Clock()
 
-    def __init__(self, score, screen, play):
+    def __init__(self, screen):
         Thread.__init__(self)
-        self.score = score
         self.screen = screen
-        self.play = play
-
-    def _set_play(self, play):
-        self.play = play
+        font = pygame.font.SysFont('Verdana', 30)
+        scoretext = font.render("Score:" + str(self.score), 1, (1, 1, 1))
+        self.screen.blit(scoretext, (700, 100))
+        pygame.display.update(scoretext.get_rect())
 
     def run(self):
-        while self.play:
+        running = True
+        while running:
             self.score += 1
-            font = pygame.font.Font(None, 30)
-            scoretext = font.render("Score:" + str(self.score), 1, (0, 0, 0))
-            self.screen.blit(scoretext, (100,100))
-            pygame.display.flip()
+            font = pygame.font.SysFont('Verdana', 30)
+            scoretext = font.render("Score:" + str(self.score), 1, (1, 1, 1))
+            self.screen.blit(scoretext, (700,100))
+            self.clock.tick(10)
+            pygame.display.update(scoretext.get_rect())
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    running = False
+
