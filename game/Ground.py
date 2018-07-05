@@ -38,7 +38,7 @@ class Ground(Thread):
         for i in range(len(self.ground)):
             self.ground[i] = pygame.image.load(random.choice(self.grounds)).convert_alpha()
             self.screen.blit(self.ground[i], self.position_ground)
-            pygame.display.update(self.ground[i].get_rect())
+            pygame.display.update(self.position_ground)
             self.position_ground = self.position_ground.move(16,0)
         pygame.display.flip()
 
@@ -49,11 +49,12 @@ class Ground(Thread):
         for i in range(0, len(self.ground) - 1):
             self.ground[i] = self.ground[i + 1]
             self.screen.blit(self.ground[i], self.position_ground)
-            pygame.display.update(self.ground[i].get_rect())
+            pygame.display.update(self.position_ground)
             self.position_ground = self.position_ground.move(16, 0)
         self.ground[len(self.ground)-1] = pygame.image.load(random.choice(self.grounds)).convert_alpha()
         self.screen.blit(self.ground[len(self.ground)-1], self.position_ground)
-        pygame.display.update(self.ground[len(self.ground)-1].get_rect())
+        self.clock.tick(10)
+        pygame.display.update(self.position_ground)
 
     def run(self):
         running = True
