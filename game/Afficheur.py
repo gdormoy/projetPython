@@ -26,13 +26,13 @@ class Afficheur(Thread):
         self.position_value = self.position_value.move(800,100)
         self.screen.blit(self.scoretext, self.position_score)
         self.screen.blit(self.scorevalue,self.position_value)
-        pygame.display.update(self.position_score)
-        pygame.display.update(self.position_value)
+        pygame.display.flip()
+        # pygame.display.update(self.position_value)
 
     def run(self):
-        running = True
+        play = True
         font = pygame.font.SysFont('Verdana', 30)
-        while running:
+        while play:
             self.score += 1
             pygame.draw.rect(self.screen, self.white, self.position_value)
             self.scorevalue = font.render(str(self.score), 1, (1, 1, 1))
@@ -40,9 +40,9 @@ class Afficheur(Thread):
             self.position_value = self.position_value.move(800, 100)
             self.screen.blit(self.scorevalue, self.position_value)
             self.clock.tick(10)
-            pygame.display.update(self.position_value)
+            pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
-                    running = False
+                    play = False
 
