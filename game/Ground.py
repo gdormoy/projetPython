@@ -18,17 +18,15 @@ class Ground(Thread):
               "images/landscape/ground/ground19.png","images/landscape/ground/ground20.png","images/landscape/ground/ground21.png",
               "images/landscape/ground/ground22.png","images/landscape/ground/ground23.png","images/landscape/ground/ground24.png"]
 
-    cactus = []
+    cactus = ["images/landscape/cactus/cactus1.png","images/landscape/cactus/cactus2.png","images/landscape/cactus/cactus3.png",
+              "images/landscape/cactus/cactus4.png","images/landscape/cactus/cactus5.png","images/landscape/cactus/cactus6.png",
+              "images/landscape/cactus/cactus7.png","images/landscape/cactus/cactus8.png","images/landscape/cactus/cactus9.png",
+              "images/landscape/cactus/cactus10.png","images/landscape/cactus/cactus11.png","images/landscape/cactus/cactus12.png"]
 
     ground = [0]*64
     surface = None
     position_ground = None
 
-
-    # ground1, ground2,ground3, ground4, ground5, ground6, ground7, ground8, ground9, ground10, ground11, ground12 = None
-    # ground13, ground4, ground15, ground16, ground17, ground18, ground19, ground20, ground21, ground22, ground23 = None
-    # ground24, ground25, ground26, ground27, ground28, ground29, ground30, ground31, ground32, ground33, ground34 = None
-    # ground35, ground36, ground37, ground38, ground39, ground40, ground41, ground42, ground43, ground44, ground45 = None
 
     def __init__(self, screen, surface):
         Thread.__init__(self)
