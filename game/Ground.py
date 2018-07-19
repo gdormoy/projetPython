@@ -18,6 +18,8 @@ class Ground(Thread):
               "images/landscape/ground/ground19.png","images/landscape/ground/ground20.png","images/landscape/ground/ground21.png",
               "images/landscape/ground/ground22.png","images/landscape/ground/ground23.png","images/landscape/ground/ground24.png"]
 
+    cactus = []
+
     ground = [0]*64
     surface = None
     position_ground = None

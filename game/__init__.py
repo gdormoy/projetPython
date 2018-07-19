@@ -39,7 +39,7 @@ def jump(position_rex):
             position_rex = position_rex.move(0, 1)
         rex.set_colorkey((255, 255, 255))
         screen.blit(rex, position_rex)
-        clock.tick(200)
+        clock.tick(500)
         pygame.display.flip()
 
 def running(position_rex):
