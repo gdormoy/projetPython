@@ -12,7 +12,7 @@ class Afficheur(Thread):
     scoretext = None
     scorevalue = None
     clock = pygame.time.Clock()
-    white = (247, 247, 247)
+    white = (255, 255, 255)
 
     def __init__(self, screen):
         Thread.__init__(self)
@@ -40,9 +40,9 @@ class Afficheur(Thread):
             self.position_value = self.position_value.move(800, 100)
             self.screen.blit(self.scorevalue, self.position_value)
             self.clock.tick(10)
-            pygame.display.flip()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    play = False
+            # pygame.display.flip()
+            # for event in pygame.event.get():
+            #     if event.type == pygame.QUIT:
+            #         pygame.quit()
+            #         play = False
 

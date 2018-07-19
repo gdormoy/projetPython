@@ -38,7 +38,7 @@ class Ground(Thread):
         for i in range(len(self.ground)):
             self.ground[i] = pygame.image.load(random.choice(self.grounds)).convert_alpha()
             self.screen.blit(self.ground[i], self.position_ground)
-            self.ground[i].set_colorkey((247, 247, 247))
+            self.ground[i].set_colorkey((255, 255, 255))
             pygame.display.flip()
             self.position_ground = self.position_ground.move(16,0)
         pygame.display.flip()
@@ -49,21 +49,21 @@ class Ground(Thread):
         self.position_ground = self.position_ground.move(0, self.surface.get_height() - 15)
         for i in range(0, len(self.ground) - 1):
             self.ground[i] = self.ground[i + 1]
+            self.ground[i].set_colorkey((255, 255, 255))
             self.screen.blit(self.ground[i], self.position_ground)
-            self.ground[i].set_colorkey((247, 247, 247))
             pygame.display.flip()
             self.position_ground = self.position_ground.move(16, 0)
         self.ground[len(self.ground)-1] = pygame.image.load(random.choice(self.grounds)).convert_alpha()
         self.screen.blit(self.ground[len(self.ground)-1], self.position_ground)
         self.clock.tick(10)
-        pygame.display.flip()
+        # pygame.display.flip()
 
     def run(self):
         play = True
         while play:
             self.slide_ground()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    play = False
+            # for event in pygame.event.get():
+            #     if event.type == pygame.QUIT:
+            #         pygame.quit()
+            #         play = False
 
