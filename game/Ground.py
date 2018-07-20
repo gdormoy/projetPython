@@ -45,6 +45,8 @@ class Ground(Thread):
 
 
     def slide_ground(self):
+        i = random.randint(0, 50)
+        print(i)
         self.position_ground = self.ground[0].get_rect()
         self.position_ground = self.position_ground.move(0, self.surface.get_height() - 15)
         for i in range(0, len(self.ground) - 1):
@@ -54,6 +56,8 @@ class Ground(Thread):
             pygame.display.flip()
             self.position_ground = self.position_ground.move(16, 0)
         self.ground[len(self.ground)-1] = pygame.image.load(random.choice(self.grounds)).convert_alpha()
+        if i < 10 :
+            self.ground[len(self.ground) - 1] = pygame.image.load(random.choice(self.cactus)).convert_alpha()
         self.screen.blit(self.ground[len(self.ground)-1], self.position_ground)
         self.clock.tick(10)
         # pygame.display.flip()

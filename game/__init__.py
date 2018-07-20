@@ -6,6 +6,8 @@ from time import sleep
 from game.Afficheur import Afficheur
 from game.Ground import Ground
 from game.Rex import Rex
+from game.Cactus import Cactus
+
 pygame.init()
 
 screen = pygame.display.set_mode((1024, 480))
@@ -82,6 +84,7 @@ def start():
                     play = 0
 
 ground = Ground(screen,surface)
+cactus = Cactus(screen,surface)
 afficheur = Afficheur(screen)
 # rex = Rex(screen, surface)
 start()
@@ -89,6 +92,7 @@ start()
 jump(position_rex)
 afficheur.start()
 ground.start()
+cactus.start()
 # rex.start()
 while continuer:
     # rex.walk()
