@@ -24,6 +24,9 @@ class Cactus(Thread):
     cactu = [0] * 64
     surface = None
     play = True
+    frame = None
+
+    white = (255, 255, 255)
 
     position_cactus = None
 
@@ -35,8 +38,11 @@ class Cactus(Thread):
         self.cactu[0].set_colorkey((255, 255, 255))
         self.position_cactus = self.cactu[0].get_rect()
         self.position_cactus = self.position_cactus.move(0, self.surface.get_height() - self.cactu[0].get_rect().bottom)
+        self.frame = pygame.Surface((self.position_cactus.width, self.position_cactus.height))
+        self.frame.fill(self.white)
         for i in range(len(self.cactu)):
-            self.cactu[i] = pygame.image.load(self.blancPng).convert_alpha()
+            self.cactu[i] = self.frame
+            self.screen.blit(self.frame, self.position_cactus)
             self.screen.blit(self.cactu[i], self.position_cactus)
             self.cactu[i].set_colorkey((255, 255, 255))
             pygame.display.flip()
@@ -46,25 +52,30 @@ class Cactus(Thread):
 
     def slide_cactus(self):
         x = random.randint(0, 500)
-        print(x)
+        # print(x)
+        self.frame = pygame.Surface((self.position_cactus.width,self.position_cactus.height))
+        self.frame.fill(self.white)
         self.position_cactus = self.cactu[0].get_rect()
         self.position_cactus = self.position_cactus.move(0, self.surface.get_height() - self.cactu[0].get_rect().bottom)
         for i in range(0, len(self.cactu) - 1):
             self.cactu[i] = self.cactu[i + 1]
             self.cactu[i].set_colorkey((255, 255, 255))
+            pygame.draw.rect(self.screen, self.white, self.position_cactus)
             self.screen.blit(self.cactu[i], self.position_cactus)
-            pygame.display.update()
+            pygame.display.flip()
+            print(self.cactu[i])
             self.position_cactus = self.position_cactus.move(16, 0)
         if x > 490:
             self.position_cactus = self.position_cactus.move(16, self.surface.get_height() - self.cactu[len(self.cactu) - 1].get_rect().bottom)
-            self.cactu[len(self.cactu) - 1] = pygame.image.load(random.choice(self.cactus))
+            self.cactu[len(self.cactu) - 1] = pygame.image.load(random.choice(self.cactus)).convert()
             self.cactu[len(self.cactu) - 1].set_colorkey((255, 255, 255))
         else:
-            self.cactu[len(self.cactu) - 1] = pygame.image.load(self.blancPng)
+            self.cactu[len(self.cactu) - 1] = self.frame
             self.cactu[len(self.cactu) - 1].set_colorkey((255, 255, 255))
+        pygame.draw.rect(self.screen, self.white, self.position_cactus)
+        self.screen.blit(self.frame, self.position_cactus)
         self.screen.blit(self.cactu[len(self.cactu)-1], self.position_cactus)
         self.clock.tick(10)
-        # pygame.display.flip()
 
     def run(self):
         while self.play:

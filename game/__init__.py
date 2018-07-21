@@ -15,7 +15,7 @@ surface = pygame.display.get_surface()
 clock = pygame.time.Clock()
 #
 rex = pygame.image.load("images/rex/t-rex-start.png").convert_alpha()
-# pygame.Surface.set_colorkey(255,255,255)
+# screen_frame = pygame.Surface((screen.width, screen.height))
 ptera = pygame.image.load("images/ptera/ptera1.png").convert_alpha()
 position_rex = rex.get_rect()
 position_rex = position_rex.move(100,surface.get_height() - 50)
@@ -97,6 +97,7 @@ while continuer:
     # rex.walk()
     # slide_ground()
     running(position_rex)
+    pygame.display.update(screen.get_rect())
     for event in pygame.event.get():
         if event.type == QUIT:
             continuer = 0
