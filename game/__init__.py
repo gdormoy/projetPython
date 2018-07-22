@@ -23,7 +23,6 @@ screen.blit(rex ,position_rex)
 
 pygame.key.set_repeat(400, 30)
 game = 1
-game = 1
 
 
 
@@ -122,8 +121,5 @@ while game:
                         if event.type == KEYUP and event.key == K_DOWN:
                             down = 0
                 position_rex = position_rex.move(0, -17)
-
-# pygame.display.quit()
-# pygame.quit()
-# sys.exit()
+start()
 
