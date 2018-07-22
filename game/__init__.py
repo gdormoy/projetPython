@@ -96,6 +96,9 @@ while game:
     pygame.display.update(screen.get_rect())
     if position_rex.colliderect(cactus.position_cactus) == 1:
         game = 0
+        ground.stop()
+        score.stop()
+        cactus.stop()
         print("score : {}".format(score.score))
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -120,7 +123,7 @@ while game:
                             down = 0
                 position_rex = position_rex.move(0, -17)
 
-pygame.display.quit()
-pygame.quit()
-sys.exit()
+# pygame.display.quit()
+# pygame.quit()
+# sys.exit()
 

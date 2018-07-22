@@ -66,5 +66,5 @@ class Cactus(Thread):
             else :
                 self.slide_cactus()
 
-    def onStop(self):
-        print(Thread.getName())
+    def stop(self):
+        self.play = False

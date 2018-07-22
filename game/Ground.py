@@ -22,6 +22,7 @@ class Ground(Thread):
     ground = [0] * 64
     surface = None
     position_ground = None
+    play = None
 
 
 
@@ -55,8 +56,11 @@ class Ground(Thread):
         self.clock.tick(20)
 
     def run(self):
-        play = True
-        while play:
+        self.play = True
+        while self.play:
             self.slide_ground()
+
+    def stop(self):
+        self.play = False
 
 

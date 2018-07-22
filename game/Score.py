@@ -13,6 +13,7 @@ class Score(Thread):
     scorevalue = None
     clock = pygame.time.Clock()
     white = (255, 255, 255)
+    play = None
 
     def __init__(self, screen):
         Thread.__init__(self)
@@ -29,9 +30,9 @@ class Score(Thread):
         pygame.display.flip()
 
     def run(self):
-        play = True
+        self.play = True
         font = pygame.font.SysFont('Verdana', 30)
-        while play:
+        while self.play:
             self.score += 1
             pygame.draw.rect(self.screen, self.white, self.position_value)
             self.scorevalue = font.render(str(self.score), 1, (1, 1, 1))
@@ -39,4 +40,7 @@ class Score(Thread):
             self.position_value = self.position_value.move(800, 100)
             self.screen.blit(self.scorevalue, self.position_value)
             self.clock.tick(10)
+
+    def stop(self):
+        self.play = False
 
