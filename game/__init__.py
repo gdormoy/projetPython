@@ -23,6 +23,7 @@ screen.blit(rex ,position_rex)
 
 pygame.key.set_repeat(400, 30)
 continuer = 1
+game = 1
 
 
 
@@ -84,43 +85,52 @@ def start():
 cactus = Cactus(screen,surface)
 ground = Ground(screen,surface)
 afficheur = Afficheur(screen)
-# rex = Rex(screen, surface)
 start()
-# rex.jump()
 cactus.start()
 pygame.display.flip()
 jump(position_rex)
 afficheur.start()
 ground.start()
-# rex.start()
-while continuer:
-    # rex.walk()
-    # slide_ground()
-    running(position_rex)
-    pygame.display.update(screen.get_rect())
+while game:
+    while continuer:
+        # print(cactus.position_cactus)
+        running(position_rex)
+        pygame.display.update(screen.get_rect())
+        if position_rex.colliderect(cactus.position_cactus) == 1:
+            print("collision")
+            continuer = 0
+            # ground._stop()
+            # cactus._stop()
+            # afficheur._stop()
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                continuer = 0
+            if event.type == KEYDOWN:
+                if event.key == K_UP or event.key == K_SPACE:
+                    jump(position_rex)
+                    rex = pygame.image.load("images/rex/t-rex1.png").convert_alpha()
+                if event.key == K_DOWN:
+                    down = 1
+                    frame = pygame.Surface((position_rex.width, position_rex.height))
+                    frame.fill(white)
+                    screen.blit(frame, position_rex)
+                    position_rex = position_rex.move(0, 17)
+                    while down:
+                        # rex.charge()
+                        charge(position_rex)
+                        for event in pygame.event.get():
+                            if event.type == QUIT:
+                                continuer = 0
+                            if event.type == KEYUP and event.key == K_DOWN:
+                                down = 0
+                    position_rex = position_rex.move(0, -17)
     for event in pygame.event.get():
         if event.type == QUIT:
-            continuer = 0
+            play = 0
         if event.type == KEYDOWN:
             if event.key == K_UP or event.key == K_SPACE:
-                # rex.jump()
                 jump(position_rex)
-                rex = pygame.image.load("images/rex/t-rex1.png").convert_alpha()
-            if event.key == K_DOWN:
-                down = 1
-                frame = pygame.Surface((position_rex.width, position_rex.height))
-                frame.fill(white)
-                screen.blit(frame, position_rex)
-                position_rex = position_rex.move(0, 17)
-                while down:
-                    # rex.charge()
-                    charge(position_rex)
-                    for event in pygame.event.get():
-                        if event.type == QUIT:
-                            continuer = 0
-                        if event.type == KEYUP and event.key == K_DOWN:
-                            down = 0
-                position_rex = position_rex.move(0, -17)
+                continuer = 1
 pygame.display.quit()
 pygame.quit()
 sys.exit()

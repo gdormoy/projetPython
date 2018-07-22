@@ -47,7 +47,7 @@ class Cactus(Thread):
         self.screen.blit(self.cactu, self.position_cactus)
         pygame.display.flip()
         self.clock.tick(10)
-        print(self.position_cactus.right)
+        # print(self.position_cactus.right)
         if self.position_cactus.right < 0:
             self.have_cactus = None
 
