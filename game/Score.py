@@ -2,7 +2,7 @@ import pygame
 from threading import Thread
 
 
-class Afficheur(Thread):
+class Score(Thread):
     pygame.init()
 
     score = 0;

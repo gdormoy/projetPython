@@ -1,7 +1,7 @@
 import pygame
 import sys
 from pygame.locals import *
-from game.Afficheur import Afficheur
+from game.Score import Score
 from game.Ground import Ground
 from game.Rex import Rex
 from game.Cactus import Cactus
@@ -22,7 +22,7 @@ position_rex = position_rex.move(100,surface.get_height() - 50)
 screen.blit(rex ,position_rex)
 
 pygame.key.set_repeat(400, 30)
-continuer = 1
+game = 1
 game = 1
 
 
@@ -80,31 +80,28 @@ def start():
                 sys.exit()
             if event.type == KEYDOWN:
                 if event.key == K_UP or event.key == K_SPACE:
+                    jump(position_rex)
                     play = 0
 
 cactus = Cactus(screen,surface)
 ground = Ground(screen,surface)
-afficheur = Afficheur(screen)
+score = Score(screen)
 start()
 cactus.start()
 pygame.display.flip()
-jump(position_rex)
-afficheur.start()
+score.start()
 ground.start()
-while continuer:
+while game:
     # print(cactus.position_cactus)
     running(position_rex)
     pygame.display.update(screen.get_rect())
     if position_rex.colliderect(cactus.position_cactus) == 1:
         # print("collision")
-        continuer = 0
-        print("score : {}".format(afficheur.score))
-        # ground._stop()
-        # cactus._stop()
-        # afficheur._stop()
+        game = 0
+        print("score : {}".format(score.score))
     for event in pygame.event.get():
         if event.type == QUIT:
-            continuer = 0
+            game = 0
         if event.type == KEYDOWN:
             if event.key == K_UP or event.key == K_SPACE:
                 jump(position_rex)
@@ -120,7 +117,7 @@ while continuer:
                     charge(position_rex)
                     for event in pygame.event.get():
                         if event.type == QUIT:
-                            continuer = 0
+                            game = 0
                         if event.type == KEYUP and event.key == K_DOWN:
                             down = 0
                 position_rex = position_rex.move(0, -17)

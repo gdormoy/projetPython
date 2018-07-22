@@ -60,7 +60,7 @@ class Cactus(Thread):
         # print(x)
         if x > 490:
             self.have_cactus = True
-            self.position_cactus = self.cactu.get_rect(center=(self.surface.get_width() ,self.surface.get_height() - self.cactu.get_rect().bottom))
+            self.position_cactus = self.cactu.get_rect(center=(self.surface.get_width() ,self.surface.get_height() - 30))
             # self.position_cactus = self.position_cactus.move(self.surface.get_width() ,self.surface.get_height() - self.cactu.get_rect().bottom)
             self.screen.blit(self.cactu, self.position_cactus)
 
