@@ -46,7 +46,7 @@ class Cactus(Thread):
         # pygame.draw.rect(self.screen, self.white, self.position_draw)
         self.screen.blit(self.cactu, self.position_cactus)
         pygame.display.flip()
-        self.clock.tick(10)
+        self.clock.tick(20)
         # print(self.position_cactus.right)
         if self.position_cactus.right < 0:
             self.have_cactus = None
@@ -80,3 +80,6 @@ class Cactus(Thread):
                 self.print_cactus()
             else :
                 self.slide_cactus()
+
+    def onStop(self):
+        print(Thread.getName())

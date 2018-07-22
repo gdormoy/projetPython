@@ -75,7 +75,7 @@ class Ground(Thread):
         #     self.cactu[len(self.ground) - 1] = pygame.image.load(random.choice(self.cactus)).convert_alpha()
         #     self.screen.blit(self.cactu[len(self.ground) - 1], self.position_cactus)
         self.screen.blit(self.ground[len(self.ground)-1], self.position_ground)
-        self.clock.tick(10)
+        self.clock.tick(20)
         # pygame.display.flip()
 
     def run(self):
