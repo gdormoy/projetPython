@@ -27,7 +27,6 @@ class Score(Thread):
         self.screen.blit(self.scoretext, self.position_score)
         self.screen.blit(self.scorevalue,self.position_value)
         pygame.display.flip()
-        # pygame.display.update(self.position_value)
 
     def run(self):
         play = True
@@ -40,9 +39,4 @@ class Score(Thread):
             self.position_value = self.position_value.move(800, 100)
             self.screen.blit(self.scorevalue, self.position_value)
             self.clock.tick(10)
-            # pygame.display.flip()
-            # for event in pygame.event.get():
-            #     if event.type == pygame.QUIT:
-            #         pygame.quit()
-            #         play = False
 

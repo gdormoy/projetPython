@@ -92,11 +92,9 @@ pygame.display.flip()
 score.start()
 ground.start()
 while game:
-    # print(cactus.position_cactus)
     running(position_rex)
     pygame.display.update(screen.get_rect())
     if position_rex.colliderect(cactus.position_cactus) == 1:
-        # print("collision")
         game = 0
         print("score : {}".format(score.score))
     for event in pygame.event.get():
